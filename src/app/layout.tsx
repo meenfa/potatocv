@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Outfit, Poppins, Playfair_Display } from "next/font/google";
+import { Poppins,Fredoka } from "next/font/google";
 import "./globals.css";
+
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-fredoka",
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -8,34 +14,23 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-playfair",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
 
 export const metadata: Metadata = {
-  title: "🥔 PotatoCV – Roast Your Resume!",
+  title: "PotatoCV – Roast Your CV!",
   description:
-    "Drop your resume, get brutally honest feedback, and laugh along the way! AI-powered resume roaster.",
-  keywords: ["PotatoCV", "Resume Roast", "Funny CV Feedback", "AI Resume"],
-  authors: [{ name: "Shristi Poudel" }],
-  creator: "PotatoCV AI",
+    "Drop your CV, get brutally honest feedback, and laugh along the way! AI-powered CV roaster.",
+  keywords: ["PotatoCV", "CV Roast", "Funny CV Feedback", "AI CV"],
+  authors: [{ name: "Ankit Karki" }],
+  creator: "PotatoCV",
   openGraph: {
-    title: "🥔 PotatoCV – Roast Your Resume!",
+    title: "PotatoCV – Roast Your CV!",
     description:
       "Paste your CV and watch our AI roast it like a potato! Fun, honest, and spicy.",
-    url: "https://yourdomain.com",
+    url: "https://potatocv.conneqtly.me/",
     siteName: "PotatoCV",
     images: [
       {
-        url: "/asset/potato-og.png",
+        url: "/asset/og.png",
         width: 800,
         height: 600,
         alt: "PotatoCV Logo",
@@ -52,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${playfair.variable} ${outfit.variable} font-poppins antialiased bg-[#FFFDF5]`}
+        className={`${fredoka.variable} font-fredoka antialiased bg-[#FFFDF5]`}
       >
         <main>{children}</main>
       </body>

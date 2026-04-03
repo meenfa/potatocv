@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import Logo from "./Logo";
-import BananaCharacter from "./BananaCharacter";
+import PotatoCharacter from "./PotatoCharacter";
 import RoastForm from "./RoastForm";
 import RoastResult from "./RoastResult";
 import Footer from "./Footer";
+import SupportButton from "./SupportButton";
 
 const Hero = () => {
   const [resume, setResume] = useState("");
@@ -36,11 +37,30 @@ const Hero = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFDF5]">
-      <div className="container mx-auto px-4 py-8 sm:py-12">
+    <div className="relative min-h-screen bg-white overflow-hidden">
+      {/* Top Gradient */}
+      <div
+        className="absolute top-0 left-0 w-full h-64 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, rgba(242, 176, 85, 0.3) 0%, rgba(255, 253, 245, 0) 100%)",
+          zIndex: 0,
+        }}
+      ></div>
+
+      {/* Bottom Gradient */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-48 pointer-events-none"
+        style={{
+          background: "linear-gradient(0deg, #f2b055 0%, rgba(255, 253, 245, 0) 100%)",
+          zIndex: 0,
+        }}
+      ></div>
+
+      {/* Main Content */}
+      <div className="container relative z-10 mx-auto px-4 py-8 sm:py-12">
         <div className="max-w-4xl mx-auto text-center">
           <Logo />
-          <BananaCharacter />
+          <PotatoCharacter />
           <RoastForm
             resume={resume}
             setResume={setResume}
@@ -51,7 +71,10 @@ const Hero = () => {
           <Footer />
         </div>
       </div>
+       {/* Support Button */}
+      <SupportButton />
 
+      {/* Global Animations */}
       <style jsx global>{`
         @keyframes bounce-slow {
           0%, 100% { transform: translateY(0px); }

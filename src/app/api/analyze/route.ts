@@ -13,43 +13,46 @@ export async function POST(req: NextRequest) {
     const prompt =
       mode === "roast"
         ? `
-You are a witty and funny career coach.
+      You are a witty, brutal, and hilarious career coach. Your goal is to roast this resume in a funny, over-the-top, comedic way — make it sharp, sarcastic, and brutally honest, but not offensive. Push the humor to the limit.
 
-Roast this resume in a playful and humorous way (not offensive).
+ IMPORTANT:
+          - Structure the response in clear sections
+          - Headings should be left-aligned with emojis
+          - Roast text should start from left, aligned with heading
+          - Each section: 3-6 lines for stronger roasting
+          - Make it readable, with short paragraphs, not one long wall of text
+          - Be playful, sarcastic, and exaggerate flaws for comedy
+          - Use emojis and humor to highlight weaknesses
 
-IMPORTANT:
-- Structure your response in clear sections
-- Use headings with emojis
-- Keep each section short (2-4 lines max)
-- Make it clean and readable (not one long paragraph)
+         FORMAT:
+          💥 SHOWSTOPPER INTRO
+          (Exaggerated, dramatic opening to your resume)
 
-Format:
+          📬 Who Even Are You?
+          (Hilarious jab at contact info)
 
-🔥 Roast Summary
-(1-2 funny lines)
+          🎯 Dream Big… Or Not
+          (Sarcastic take on your career objective)
 
-📬 Contact Info
-(short roast)
+          🎓 Brain Drain Academy
+          (Funny poke at education)
 
-🎯 Objective
-(short roast)
+          💼 Work Woes
+          (Highlight funny mistakes or struggles in experience)
 
-🎓 Education
-(short roast)
+          🧠 Skillz or Not?
+          (Roast missing or questionable skills)
 
-💼 Experience
-(short roast)
+          😱 Reality Slap
+          (A brutal, funny closing line)
 
-🧠 Skills
-(short roast)
-
-📌 Final Verdict
-(1 funny closing line)
-
-Resume:
-${resume}
-`
+          🔍 Tiny Truth Bomb
+          (Short witty summary of their resume)
+          Resume:
+          ${resume}
+          `
         : `Review this resume and give structured feedback with headings.`;
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -63,7 +66,7 @@ ${resume}
           messages: [
             {
               role: "system",
-              content: "You are helpful, witty, and clear.",
+              content: "You are a brutally honest, sarcastic, and witty career coach. Always roast resumes in a funny, over-the-top, comedic way. Make it sarcastic, sharp, and brutally honest, but never offensive."
             },
             {
               role: "user",
@@ -71,7 +74,7 @@ ${resume}
             },
           ],
           temperature: 0.7,
-          max_tokens: 400,
+          max_tokens: 800,
         }),
       }
     );
@@ -81,7 +84,7 @@ ${resume}
 
     const result =
       data?.choices?.[0]?.message?.content ||
-      "AI didn’t return anything 😅";
+      "Hmm… something went wrong on my end. Or maybe your CV is just too perfect for me to handle! Keep slaying!😅";
 
     return NextResponse.json({ result });
   } catch (error: any) {
