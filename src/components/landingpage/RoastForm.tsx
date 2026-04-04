@@ -44,7 +44,7 @@ const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) 
   }, [loading, messageIndex]);
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+    <div className="bg-white p-6 sm:p-8">
       {/* Textarea */}
       <div className="mb-6">
         <label className="block text-[#66421f] font-semibold mb-3 text-base sm:text-lg">

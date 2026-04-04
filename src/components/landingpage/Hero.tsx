@@ -42,7 +42,8 @@ const Hero = () => {
       <div
         className="absolute top-0 left-0 w-full h-64 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(242, 176, 85, 0.3) 0%, rgba(255, 253, 245, 0) 100%)",
+          // background: "linear-gradient(180deg, rgba(242, 176, 85, 0.3) 0%, rgba(255, 253, 245, 0) 100%)",
+          background: "linear-gradient(180deg, rgba(244, 163, 0, 0.18) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
       ></div>
@@ -51,7 +52,8 @@ const Hero = () => {
       <div
         className="absolute bottom-0 left-0 w-full h-48 pointer-events-none"
         style={{
-          background: "linear-gradient(0deg, #f2b055 0%, rgba(255, 253, 245, 0) 100%)",
+          // background: "linear-gradient(0deg, #f2b055 0%, rgba(255, 253, 245, 0) 100%)",
+         background: "linear-gradient(0deg, rgba(244, 163, 0, 0.22) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
       ></div>
