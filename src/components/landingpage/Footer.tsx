@@ -10,7 +10,7 @@ const Footer = () => {
       {/* Main Text */}
       <div className="space-y-2 max-w-xl mx-auto">
         <p className="text-sm sm:text-base text-[#66421f] font-semibold">
-            Fun, friendly, and slightly ridiculous.
+          Fun, friendly, and slightly ridiculous.
         </p>
         <p className="text-sm sm:text-base text-[#66421f]">
           Your CV is in good hands… your smile is optional.
@@ -30,7 +30,7 @@ const Footer = () => {
             alt="Product Hunt"
             width={200}
             height={120}
-            className="object-contain"
+            className="object-contain w-[200px] h-auto"
           />
         </a>
       </div>
@@ -38,7 +38,7 @@ const Footer = () => {
       {/* Made By */}
       <div className="mt-8">
         <p className="text-md text-[#44260a] mb-3">
-         Made by{" "}
+          Made by{" "}
           <span className="font-semibold">
             <a
               href="https://www.karkiankit.com.np/"

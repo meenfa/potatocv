@@ -71,12 +71,11 @@ const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) 
         <button
           onClick={handleRoast}
           disabled={!isValid || loading}
-          className={`relative z-10 w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-[#f2b055] text-[#66421f] rounded-xl font-bold text-base sm:text-lg transition-all duration-100 active:translate-y-[8px] ${
-            !isValid ? "opacity-100 cursor-not-allowed" : ""
-          }`}
+          className={`relative z-10 w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-[#f2b055] text-[#66421f] rounded-xl font-bold text-base sm:text-lg transition-all duration-100 active:translate-y-[8px] ${!isValid ? "opacity-100 cursor-not-allowed" : ""
+            }`}
         >
           {loading ? (
-            <span className="flex flex-col items-center gap-1">
+            <span className="flex flex-col items-center gap-1 ">
               <span className="text-sm sm:text-base">{loadingMessage}</span>
               <svg className="animate-spin h-5 w-5 mt-1" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
@@ -84,7 +83,7 @@ const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) 
               </svg>
             </span>
           ) : (
-            <span>🥔 Roast My CV</span>
+            <span className="cursor-pointer">🥔 Roast My CV</span>
           )}
         </button>
       </div>

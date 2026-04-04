@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins,Fredoka } from "next/font/google";
+import { Poppins, Fredoka } from "next/font/google";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "PotatoCV – Roast Your CV!",
   description:
     "Drop your CV, get brutally honest feedback, and laugh along the way! AI-powered CV roaster.",
-  keywords: ["PotatoCV", "CV Roast", "Funny CV Feedback", "AI CV"],
+  keywords: ["PotatoCV","funnyroast CV", "CV Roast", "Funny CV Feedback", "AI CV"],
   authors: [{ name: "Ankit Karki" }],
   creator: "PotatoCV",
   openGraph: {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/asset/og.png",
-        width: 800,
-        height: 600,
+        width: 600,
+        height: 400,
         alt: "PotatoCV Logo",
       },
     ],

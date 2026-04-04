@@ -38,7 +38,6 @@ const Hero = () => {
 
   return (
     <div className="relative min-h-screen bg-white overflow-hidden">
-      {/* Top Gradient */}
       <div
         className="absolute top-0 left-0 w-full h-64 pointer-events-none"
         style={{
@@ -47,8 +46,6 @@ const Hero = () => {
           zIndex: 0,
         }}
       ></div>
-
-      {/* Bottom Gradient */}
       <div
         className="absolute bottom-0 left-0 w-full h-48 pointer-events-none"
         style={{
@@ -73,7 +70,6 @@ const Hero = () => {
           <Footer />
         </div>
       </div>
-       {/* Support Button */}
       <SupportButton />
 
       {/* Global Animations */}
