@@ -20,17 +20,17 @@ const Footer = () => {
       {/* Product Hunt Logo Button */}
       <div className="mt-6 flex justify-center">
         <a
-          href="https://www.producthunt.com/"
+          href="https://www.producthunt.com/products/potatocv?launch=potatocv"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center rounded-lg p-2 hover:bg-[#f2b055]/20 transition"
         >
           <Image
-            src="/asset/producthunt.png"
+            src="/asset/ph.png"
             alt="Product Hunt"
-            width={200}
-            height={120}
-            className="object-contain"
+            width={180}
+            height={40}
+            className="object-contain w-40 h-auto"
           />
         </a>
       </div>

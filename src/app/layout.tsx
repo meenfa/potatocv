@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Fredoka } from "next/font/google";
 import "./globals.css";
-
+import { Toaster } from "@/components/ui/sonner";
 const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400"],
@@ -14,14 +14,31 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://potatocv.conneqtly.me"),
   title: "PotatoCV – Roast Your CV!",
   description:
-    "Drop your CV, get brutally honest feedback, and laugh along the way! AI-powered CV roaster.",
-  keywords: ["PotatoCV","funnyroast CV", "CV Roast", "Funny CV Feedback", "AI CV"],
+    "Drop your CV and get brutally honest, AI-powered feedback wrapped in humor. Free, no login needed. Just paste and get roasted!",
+  keywords: [
+    "PotatoCV",
+    "CV Roast",
+    "Funny CV Feedback",
+    "AI CV Review",
+    "Resume Roast",
+    "AI Resume Feedback",
+    "Free CV Checker",
+    "Brutal CV Feedback",
+  ],
   authors: [{ name: "Ankit Karki" }],
   creator: "PotatoCV",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "PotatoCV – Roast Your CV!",
     description:
@@ -31,13 +48,24 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/asset/og.png",
-        width: 600,
-        height: 400,
-        alt: "PotatoCV Logo",
+        width: 1200,
+        height: 630,
+        alt: "PotatoCV – AI CV Roaster",
       },
     ],
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PotatoCV – Roast Your CV!",
+    description:
+      "Paste your CV and watch our AI roast it like a potato! Fun, honest, and spicy.",
+    images: ["/asset/og.png"],
+    creator: "@ankitkarki27",
+  },
+  alternates: {
+    canonical: "https://potatocv.conneqtly.me/",
   },
 };
 
@@ -50,6 +78,7 @@ export default function RootLayout({
         className={`${fredoka.variable} font-fredoka antialiased bg-[#FFFDF5]`}
       >
         <main>{children}</main>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
