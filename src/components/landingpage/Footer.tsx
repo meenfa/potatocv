@@ -30,7 +30,7 @@ const Footer = () => {
             alt="Product Hunt"
             width={200}
             height={120}
-            className="object-contain w-[200px] h-auto"
+            className="object-contain"
           />
         </a>
       </div>

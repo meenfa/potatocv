@@ -10,8 +10,11 @@ interface RoastResultProps {
 const RoastResult = ({ roast, onClear }: RoastResultProps) => {
   if (!roast) return null;
 
-  // Split roast into sections using emojis as heading markers
-  const sections = roast.split(/\n(?=[💥📬🎯🎓💼🧠😱🔍])/);
+  // Split into lines instead of sections
+  const lines = roast
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
 
   return (
     <div className="mt-4 rounded-2xl max-w-4xl mx-auto border-4 border-dashed border-[#C68642] overflow-hidden animate-fade-in">
@@ -21,25 +24,15 @@ const RoastResult = ({ roast, onClear }: RoastResultProps) => {
         </h2>
       </div>
 
-      <div className="p-6 sm:p-8 space-y-6">
-        {sections.map((section, idx) => {
-          // Split heading from content
-          const lines = section.trim().split("\n");
-          const heading = lines[0];
-          const content = lines.slice(1).join("\n");
-
-          return (
-            <div key={idx} className="text-left">
-              <p className="text-left text-[#1F1F1F] text-xl sm:text-2xl font-bold mb-2 uppercase">
-                {heading}
-              </p>
-
-              <p className="text-[#C68642] text-base sm:text-xl leading-relaxed whitespace-pre-wrap">
-                {content}
-              </p>
-            </div>
-          );
-        })}
+      <div className="p-6 sm:p-8 space-y-4">
+        {lines.map((line, idx) => (
+          <p
+            key={idx}
+           className="text-[#C68642] text-left text-base sm:text-xl leading-relaxed font-medium tracking-tight"
+            >
+            {line}
+          </p>    
+        ))}
 
         <div className="mt-6 pt-4 border-t border-[#7a4206] text-center">
           <button
