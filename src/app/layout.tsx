@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Fredoka } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next"
 const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400"],
