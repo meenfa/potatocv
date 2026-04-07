@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Fredoka } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400"],
@@ -78,6 +79,7 @@ export default function RootLayout({
         className={`${fredoka.variable} font-fredoka antialiased bg-[#FFFDF5]`}
       >
         <main>{children}</main>
+        <Analytics />
         <Toaster position="top-center" richColors />
       </body>
     </html>
