@@ -1,7 +1,7 @@
 // src/app/api/analyze/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-interface MistralRequestBody {
+interface AIRequestBody {
   model: string;
   messages: Array<{
     role: "system" | "user";
@@ -12,7 +12,7 @@ interface MistralRequestBody {
   stop?: string[];
 }
 
-interface MistralResponse {
+interface AIResponse {
   choices?: Array<{
     message?: {
       content?: string;
@@ -51,8 +51,9 @@ export async function POST(req: NextRequest) {
         ? `Roast this resume in 3 short savage funny sentences.\n\n${trimmedResume}`
         : `Give 1-2 short practical resume improvements.\n\n${trimmedResume}`;
 
-    const requestBody: MistralRequestBody = {
-      model: "mistral-small-latest",
+    const requestBody: AIRequestBody = {
+
+      model: process.env.AI_MODEL || "gemini-3.1-flash-lite-preview",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
@@ -62,10 +63,11 @@ export async function POST(req: NextRequest) {
       stop: ["We need", "Let's", "Line1", "Line 1"],
     };
 
-    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+    // const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
+        Authorization: `Bearer ${process.env.GEMINI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
@@ -78,7 +80,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const data: MistralResponse = await response.json();
+    const data: AIResponse = await response.json();
     const rawResult = data?.choices?.[0]?.message?.content || "";
 
     const cleanedResult = cleanAiOutput(rawResult, mode);
@@ -89,7 +91,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         result: error.message.includes("API error")
-          ? "The AI service is currently unavailable. Try again later!"
+          ? "Our AI is on a Chiya break☕. Try again in a moment!"
           : "Something went wrong. Try again or check your input!",
       },
       { status: 500 }

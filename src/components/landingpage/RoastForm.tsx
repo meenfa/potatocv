@@ -161,8 +161,6 @@ const RoastForm = ({
           >
             {isExtracting ? "Extracting Text..." : "Choose File"}
           </button>
-
-
           <p className="text-sm text-gray-500">PDF or DOCX only</p>
         </div>
       )}
