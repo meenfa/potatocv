@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         result: error.message.includes("API error")
-          ? "Our AI is on a Chiya break☕. Try again in a moment!"
+          ? "Our PotatoAI is on a Chiya break☕. Try again in a moment!"
           : "Something went wrong. Try again or check your input!",
       },
       { status: 500 }

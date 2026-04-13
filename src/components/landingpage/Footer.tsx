@@ -54,7 +54,7 @@ const Footer = () => {
         {/* Social Icons with Brand Colors */}
         <div className="flex justify-center gap-4 mt-3">
           <a
-            href="https://github.com/ankitkarki27"
+            href="https://github.com/meenfa"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 w-max px-4 py-2 border border-black rounded-lg hover:bg-gray-100 transition"
@@ -64,7 +64,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/ankitkarki27"
+            href="https://www.linkedin.com/in/meenfa"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 w-max px-4 py-2 border border-black rounded-lg hover:bg-blue-100 hover:text-blue-800 transition"
