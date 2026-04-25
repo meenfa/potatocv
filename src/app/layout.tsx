@@ -16,7 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://potatocv.conneqtly.me"),
+  metadataBase: new URL("https://potatocv.lol/"),
   title: "PotatoCV – Roast Your CV!",
   description:
     "Drop your CV and get brutally honest, AI-powered feedback wrapped in humor. Free, no login needed. Just paste and get roasted!",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "PotatoCV – Roast Your CV!",
     description:
       "Paste your CV and watch our AI roast it like a potato! Fun, honest, and spicy.",
-    url: "https://potatocv.conneqtly.me/",
+    url: "https://potatocv.lol/",
     siteName: "PotatoCV",
     images: [
       {
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     creator: "@ankitkarki27",
   },
   alternates: {
-    canonical: "https://potatocv.conneqtly.me/",
+    canonical: "https://potatocv.lol/",
   },
 };
 

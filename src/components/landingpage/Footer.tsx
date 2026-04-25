@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -41,12 +42,12 @@ const Footer = () => {
           Made by{" "}
           <span className="font-semibold">
             <a
-              href="https://www.karkiankit.com.np/"
+              href="https://www.meenfa.tech/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              @ankitkarki27
+              Ankit Karki
             </a>
           </span>
         </p>
@@ -60,9 +61,9 @@ const Footer = () => {
             className="flex items-center gap-2 w-max px-4 py-2 border border-black rounded-lg hover:bg-gray-100 transition"
           >
             <FaGithub className="text-black text-lg" />
-            <span className="text-black font-medium">GitHub</span>
+            {/* <span className="text-black font-medium">GitHub</span> */}
           </a>
-
+          
           <a
             href="https://www.linkedin.com/in/meenfa"
             target="_blank"
@@ -70,8 +71,17 @@ const Footer = () => {
             className="flex items-center gap-2 w-max px-4 py-2 border border-black rounded-lg hover:bg-blue-100 hover:text-blue-800 transition"
           >
             <FaLinkedin className="text-blue-700 text-lg" />
-            <span className="text-blue-700 font-medium">LinkedIn</span>
+            {/* <span className="text-blue-700 font-medium">LinkedIn</span> */}
           </a>
+          <a
+            href="https://x.com/meenfax"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 w-max px-4 py-2 border border-black rounded-lg hover:bg-gray-100 transition"
+          >
+            <FaXTwitter className="text-black text-lg" />
+          </a>
+
         </div>
       </div>
 

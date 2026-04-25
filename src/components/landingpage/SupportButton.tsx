@@ -9,7 +9,6 @@ const SupportButton = () => {
 
   return (
     <>
-      {/* Fixed Support Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <div className="relative inline-block" onClick={() => setOpen(true)}>
           <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-xl z-0" />
@@ -25,7 +24,6 @@ const SupportButton = () => {
         </div>
       </div>
 
-      {/* Modal */}
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
@@ -44,11 +42,10 @@ const SupportButton = () => {
                   boxShadow: "inset 0 1px 0 #EED5B7, inset 0 -4px 0 #8B5A2B",
                 }}
               >
-                <span className="text-[#66421f] font-semibold text-xs sm:text-sm">Sorry 😅</span>
+                <span className="text-[#66421f] font-semibold text-xs sm:text-sm">Sorry,I can't</span>
               </div>
             </button>
 
-            {/* Heading */}
             <h2 className="text-base sm:text-xl font-bold pt-4 mb-2 text-[#66421f] flex items-center justify-center gap-2">
               Enjoyed the roast?
             </h2>
@@ -57,12 +54,10 @@ const SupportButton = () => {
               Support us to keep it free!
             </p>
 
-            {/* Updated Rs1 part */}
             <p className="text-[#66421f] mb-5 text-xs sm:text-sm flex justify-center items-center gap-1 leading-relaxed">
               Buy us a cup of chiya? ☕
             </p>
 
-            {/* QR */}
             <Image
               src="/asset/supportqrimg.png"
               alt="Support QR"
@@ -71,7 +66,6 @@ const SupportButton = () => {
               className="mx-auto mb-4 rounded-lg w-40 h-auto sm:w-52"
             />
 
-            {/* eSewa / Khalti ID */}
             <div className="inline-block border-2 border-[#66421f] rounded-lg px-3 py-1.5">
               <p className="text-xs sm:text-sm text-[#66421f] font-medium">
                 eSewa / Khalti:{" "}
@@ -84,7 +78,6 @@ const SupportButton = () => {
                 </span>
               </p>
             </div>
-
           </div>
         </div>
       )}

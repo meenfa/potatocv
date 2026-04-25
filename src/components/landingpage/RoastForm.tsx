@@ -1,5 +1,6 @@
 "use client";
 
+import { File, Upload, SaveAll   } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 interface RoastFormProps {
@@ -152,7 +153,7 @@ const RoastForm = ({
             accept=".pdf,.docx"
             className="hidden"
           />
-          <button
+          {/* <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isExtracting}
@@ -160,6 +161,22 @@ const RoastForm = ({
               }`}
           >
             {isExtracting ? "Extracting Text..." : "Choose File"}
+          </button> */}
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isExtracting}
+            className={` text-[#66421f] px-6 py-3 rounded-xl font-bold text-base sm:text-lg mb-4 flex items-center gap-2 cursor-pointer ${isExtracting ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+          >
+            {isExtracting ? (
+              "Extracting Text..."
+            ) : (
+              <>
+                <Upload size={52} />
+                {/* <span>Upload Resume</span> */}
+              </>
+            )}
           </button>
           <p className="text-sm text-gray-500">PDF or DOCX only</p>
         </div>

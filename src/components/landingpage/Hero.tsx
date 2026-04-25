@@ -7,6 +7,7 @@ import RoastForm from "./RoastForm";
 import RoastResult from "./RoastResult";
 import Footer from "./Footer";
 import SupportButton from "./SupportButton";
+import FeedbackButton from "./FeedbackButton";
 
 const Hero = () => {
   const [resume, setResume] = useState("");
@@ -71,6 +72,7 @@ const Hero = () => {
         </div>
       </div>
       <SupportButton />
+      <FeedbackButton />
 
       {/* Global Animations */}
       <style jsx global>{`
