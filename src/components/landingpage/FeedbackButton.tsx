@@ -54,8 +54,8 @@ const FeedbackButton = () => {
 
   return (
     <>
-   <div className="relative">
-      {/* <div className="fixed bottom-6 right-44 z-50"> */}
+      <div className="relative">
+        {/* <div className="fixed bottom-6 right-44 z-50"> */}
         <div className="relative inline-block" onClick={() => setOpen(true)}>
           <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-xl z-0" />
 
@@ -124,7 +124,11 @@ const FeedbackButton = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-[#f2b055] px-4 py-3 font-bold text-[#66421f] transition disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                className={`w-full relative font-black text-black inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl  bg-[#f2b055] transition-all duration-100 active:translate-y-[4px] ${loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                style={{
+                  boxShadow: "inset 0 1px 0 #EED5B7, inset 0 -4px 0 #000000",
+                }}
               >
                 {loading ? "Sending..." : "Submit Feedback"}
               </button>

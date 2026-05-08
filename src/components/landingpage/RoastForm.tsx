@@ -1,8 +1,9 @@
 "use client";
 
-import { File, Upload, SaveAll   } from "lucide-react";
+import { File, Upload, SaveAll } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import CustomCircleButton from "../common/CustomCircleButton";
 interface RoastFormProps {
   resume: string;
   setResume: (value: string) => void;
@@ -121,7 +122,7 @@ const RoastForm = ({
 
   return (
     <div className="bg-white p-6 sm:p-8 rounded-xl">
-      <div className="flex border-b border-[#C68642] mb-6">
+      <div className="flex border-b border-[#C68642] mb-2">
         <button
           type="button"
           className={`px-4 py-2 font-semibold text-base sm:text-lg ${activeTab === "upload"
@@ -135,7 +136,7 @@ const RoastForm = ({
         <button
           type="button"
           className={`px-4 py-2 font-semibold text-base sm:text-lg ${activeTab === "paste"
-            ? "text-[#66421f] border-b-2 border-[#C68642]"
+            ? "text-[#66421f] border-b-2 border-[#2c1905]"
             : "text-gray-400"
             }`}
           onClick={() => setActiveTab("paste")}
@@ -145,7 +146,7 @@ const RoastForm = ({
       </div>
 
       {activeTab === "upload" && (
-        <div className="mb-6 flex flex-col items-center justify-center border-4 border-dashed border-[#C68642] rounded-xl p-8 text-center">
+        <div className="mb-6 flex flex-col items-center justify-center border-4 border-dashed border-[#382007] rounded-xl p-8 text-center">
           <input
             type="file"
             ref={fileInputRef}
@@ -153,32 +154,11 @@ const RoastForm = ({
             accept=".pdf,.docx"
             className="hidden"
           />
-          {/* <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isExtracting}
-            className={`bg-[#f2b055] text-[#66421f] px-6 py-3 rounded-xl font-bold text-base sm:text-lg mb-4 ${isExtracting ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-          >
-            {isExtracting ? "Extracting Text..." : "Choose File"}
-          </button> */}
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isExtracting}
-            className={` text-[#66421f] px-6 py-3 rounded-xl font-bold text-base sm:text-lg mb-4 flex items-center gap-2 cursor-pointer ${isExtracting ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-          >
-            {isExtracting ? (
-              "Extracting Text..."
-            ) : (
-              <>
-                <Upload size={52} />
-                {/* <span>Upload Resume</span> */}
-              </>
-            )}
-          </button>
-          <p className="text-sm text-gray-500">PDF or DOCX only</p>
+
+          <CustomCircleButton onClick={() => fileInputRef.current?.click()}>
+            <Upload size={26} />
+          </CustomCircleButton>
+       
         </div>
       )}
 
@@ -205,7 +185,7 @@ const RoastForm = ({
           type="button"
           onClick={handleRoast}
           disabled={!isValid || loading || activeTab === "upload"}
-          className={`relative z-10 w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-[#f2b055] text-[#66421f] rounded-xl font-bold text-base sm:text-lg transition-all duration-100 active:translate-y-[8px] ${!isValid || loading || activeTab === "upload"
+          className={`relative z-10 w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-[#f2b055] text-[#2b1704] rounded-xl font-bold text-base sm:text-lg transition-all duration-100 active:translate-y-[8px] ${!isValid || loading || activeTab === "upload"
             ? "opacity-100 cursor-not-allowed"
             : "cursor-pointer"
             }`}
@@ -213,22 +193,6 @@ const RoastForm = ({
           {loading ? (
             <span className="flex flex-col items-center gap-1">
               <span className="text-sm sm:text-base">{loadingMessage}</span>
-              <svg className="animate-spin h-5 w-5 mt-1" viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="none"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
             </span>
           ) : (
             <span>🥔 Roast My CV</span>

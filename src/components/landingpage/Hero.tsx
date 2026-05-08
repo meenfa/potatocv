@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Logo from "./Logo";
+import Header from "./Header";
 import PotatoCharacter from "./PotatoCharacter";
 import RoastForm from "./RoastForm";
 import RoastResult from "./RoastResult";
@@ -42,7 +42,6 @@ const Hero = () => {
       <div
         className="absolute top-0 left-0 w-full h-64 pointer-events-none"
         style={{
-          // background: "linear-gradient(180deg, rgba(242, 176, 85, 0.3) 0%, rgba(255, 253, 245, 0) 100%)",
           background: "linear-gradient(180deg, rgba(244, 163, 0, 0.18) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
@@ -56,10 +55,16 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Main Content */}
-      <div className="container relative z-10 mx-auto px-4 py-8 sm:py-12">
+      <div className="container relative z-10 mx-auto px-4 py-4 sm:py-8">
         <div className="max-w-4xl mx-auto text-center">
-          <Logo />
+          <Header />
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-[#1F1F1F] leading-tight mb-3">
+            Let&apos;s roast your CV, buddy!
+          </h1>
+
+          <p className="text-xs sm:text-sm md:text-base text-[#1F1F1F]/70">
+            AI-powered CV roasting.
+          </p>
           <PotatoCharacter />
           <RoastForm
             resume={resume}
