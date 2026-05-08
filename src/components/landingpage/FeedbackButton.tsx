@@ -54,8 +54,8 @@ const FeedbackButton = () => {
 
   return (
     <>
-      {/* Fixed Feedback Button */}
-      <div className="fixed bottom-6 right-44 z-50">
+   <div className="relative">
+      {/* <div className="fixed bottom-6 right-44 z-50"> */}
         <div className="relative inline-block" onClick={() => setOpen(true)}>
           <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-xl z-0" />
 
@@ -99,7 +99,7 @@ const FeedbackButton = () => {
             <form onSubmit={handleSubmit} className="mt-5 space-y-3 text-left">
               <input
                 type="text"
-                placeholder="Name / username optional"
+                placeholder="Name / Username(Optional)"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-xl border-2 border-[#e8c99a] bg-white px-4 py-3 text-sm outline-none focus:border-[#f2b055]"

@@ -51,7 +51,7 @@ const Hero = () => {
         className="absolute bottom-0 left-0 w-full h-48 pointer-events-none"
         style={{
           // background: "linear-gradient(0deg, #f2b055 0%, rgba(255, 253, 245, 0) 100%)",
-         background: "linear-gradient(0deg, rgba(244, 163, 0, 0.22) 0%, rgba(255, 248, 240, 0) 100%)",
+          background: "linear-gradient(0deg, rgba(244, 163, 0, 0.22) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
       ></div>
@@ -71,8 +71,10 @@ const Hero = () => {
           <Footer />
         </div>
       </div>
-      <SupportButton />
-      <FeedbackButton />
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col gap-3">
+        <SupportButton />
+        <FeedbackButton />
+      </div>
 
       {/* Global Animations */}
       <style jsx global>{`

@@ -13,7 +13,6 @@ const PotatoCharacter = () => {
 
   return (
     <div className="relative flex justify-center mb-0">
-      {/* Main potato */}
       <div className="relative animate-bounce-slow z-10">
         <Image
           src="/asset/7.png"
@@ -25,7 +24,6 @@ const PotatoCharacter = () => {
         />
       </div>
 
-      {/* Small floating potatos */}
       {smallPotatos.map((potato, index) => (
         <div
           key={index}

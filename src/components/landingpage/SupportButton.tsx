@@ -9,7 +9,8 @@ const SupportButton = () => {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* Trigger Button */}
+      <div className="relative">
         <div className="relative inline-block" onClick={() => setOpen(true)}>
           <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-xl z-0" />
           <div
@@ -19,17 +20,20 @@ const SupportButton = () => {
             }}
           >
             <AiFillHeart className="text-[#66421f] mr-2 text-lg sm:text-xl" />
-            <span className="text-[#66421f] font-bold text-sm sm:text-base">Support</span>
+            <span className="text-[#66421f] font-bold text-sm sm:text-base">
+              Support
+            </span>
           </div>
         </div>
       </div>
 
+      {/* Modal */}
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
           onClick={(e) => e.target === e.currentTarget && setOpen(false)}
         >
-          <div className="bg-[#fffdf5] rounded-2xl border-4 border-[#673d13] p-6 sm:p-8 relative w-full max-w-sm text-center shadow-xl">
+          <div className="bg-[#fffdf5] rounded-2xl border-4 border-[#673d13] p-6 sm:p-8 relative w-full max-w-md sm:max-w-lg text-center shadow-xl">
 
             {/* Close Button */}
             <button
@@ -42,41 +46,84 @@ const SupportButton = () => {
                   boxShadow: "inset 0 1px 0 #EED5B7, inset 0 -4px 0 #8B5A2B",
                 }}
               >
-                <span className="text-[#66421f] font-semibold text-xs sm:text-sm">Sorry,I can't</span>
+                <span className="text-[#66421f] font-semibold text-xs sm:text-sm">
+                  Sorry, I can't
+                </span>
               </div>
             </button>
 
-            <h2 className="text-base sm:text-xl font-bold pt-4 mb-2 text-[#66421f] flex items-center justify-center gap-2">
+            {/* Header */}
+            <h2 className="text-base sm:text-xl font-bold pt-4 mb-2 text-[#66421f]">
               Enjoyed the roast?
             </h2>
 
-            <p className="text-[#66421f] mb-1 text-sm sm:text-base font-medium">
-              Support us to keep it free!
+            <p className="text-[#66421f] text-sm sm:text-base font-medium">
+              Support to keep it free!
             </p>
 
-            <p className="text-[#66421f] mb-5 text-xs sm:text-sm flex justify-center items-center gap-1 leading-relaxed">
-              Buy us a cup of chiya? ☕
-            </p>
+            {/* 2 COLUMN LAYOUT */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center mt-6">
 
-            <Image
-              src="/asset/supportqrimg.png"
-              alt="Support QR"
-              width={200}
-              height={200}
-              className="mx-auto mb-4 rounded-lg w-40 h-auto sm:w-52"
-            />
+              {/* LEFT: MOMO */}
+              <div className="text-center sm:text-left">
+                <p className="text-sm text-[#66421f] font-semibold mb-2">
+                  Support me with momo
+                </p>
 
-            <div className="inline-block border-2 border-[#66421f] rounded-lg px-3 py-1.5">
-              <p className="text-xs sm:text-sm text-[#66421f] font-medium">
-                eSewa / Khalti:{" "}
-                <span
-                  className="font-bold cursor-pointer select-all"
-                  title="Tap to copy"
-                  onClick={() => navigator.clipboard?.writeText("9823645664")}
+                <a
+                  href="https://buymemomo.com/meenfax"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#f2b055] text-[#66421f] font-bold transition hover:scale-105 active:translate-y-[2px]"
+                  style={{
+                    boxShadow:
+                      "inset 0 1px 0 #EED5B7, inset 0 -4px 0 #8B5A2B",
+                  }}
                 >
-                  9823645664
-                </span>
-              </p>
+                  <Image
+                    src="/asset/momo-logo.png"
+                    alt="Momo Logo"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                  />
+                  Buy Me Momo
+                </a>
+
+                <p className="text-[11px] text-[#66421f]/70 mt-2">
+                  (digitally, sadly… no achar included)
+                </p>
+              </div>
+
+              {/* RIGHT: QR */}
+              <div className="text-center sm:border-l sm:border-[#66421f]/20 sm:pl-6">
+                <p className="text-xs sm:text-sm text-[#66421f] mb-2 font-medium">
+                  Scan to support
+                </p>
+
+                <Image
+                  src="/asset/supportqrimg.png"
+                  alt="Support QR"
+                  width={200}
+                  height={200}
+                  className="mx-auto rounded-lg w-36 sm:w-44"
+                />
+
+                <div className="mt-3 inline-block border-2 border-[#66421f] rounded-lg px-3 py-1.5">
+                  <p className="text-xs sm:text-sm text-[#66421f] font-medium">
+                    eSewa / Khalti:{" "}
+                    <span
+                      className="font-bold cursor-pointer select-all"
+                      onClick={() =>
+                        navigator.clipboard?.writeText("9823645664")
+                      }
+                    >
+                      9823645664
+                    </span>
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
