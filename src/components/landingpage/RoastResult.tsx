@@ -28,10 +28,10 @@ const RoastResult = ({ roast, onClear }: RoastResultProps) => {
         {lines.map((line, idx) => (
           <p
             key={idx}
-           className="text-[#C68642] text-left text-base sm:text-xl leading-relaxed font-medium tracking-tight"
-            >
+            className="text-[#C68642] text-left text-base sm:text-xl leading-relaxed font-medium tracking-tight"
+          >
             {line}
-          </p>    
+          </p>
         ))}
 
         <div className="mt-6 pt-4 border-t border-[#7a4206] text-center">
@@ -39,7 +39,7 @@ const RoastResult = ({ roast, onClear }: RoastResultProps) => {
             onClick={onClear}
             className="text-gray-800 hover:text-[#C68642] text-xl transition-colors cursor-pointer"
           >
-            Roast another CV →
+            Roast another CV
           </button>
         </div>
       </div>
