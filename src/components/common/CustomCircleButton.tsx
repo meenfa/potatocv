@@ -24,10 +24,8 @@ const CustomCircleButton = ({
         disabled ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
       } ${className}`}
     >
-      {/* shadow layer */}
       <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-full z-0" />
 
-      {/* main button */}
       <div
         className="relative z-10 w-full h-full flex items-center justify-center rounded-full bg-[#f2b055] transition-all duration-100 active:translate-y-[4px]"
         style={{

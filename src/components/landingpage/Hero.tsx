@@ -28,10 +28,10 @@ const Hero = () => {
       });
 
       const data = await res.json();
-      setRoast(data.result || "Got nothing back! Try again? 🍌");
+      setRoast(data.result || "Got nothing back! Try again? ");
     } catch (err) {
       console.error(err);
-      setRoast("Oops! Something went wrong. Try again? 🍌");
+      setRoast("Oops! Something went wrong. Try again? ");
     } finally {
       setLoading(false);
     }
@@ -42,7 +42,8 @@ const Hero = () => {
       <div
         className="absolute top-0 left-0 w-full h-64 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(244, 163, 0, 0.18) 0%, rgba(255, 248, 240, 0) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(244, 163, 0, 0.18) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
       ></div>
@@ -50,7 +51,8 @@ const Hero = () => {
         className="absolute bottom-0 left-0 w-full h-48 pointer-events-none"
         style={{
           // background: "linear-gradient(0deg, #f2b055 0%, rgba(255, 253, 245, 0) 100%)",
-          background: "linear-gradient(0deg, rgba(244, 163, 0, 0.22) 0%, rgba(255, 248, 240, 0) 100%)",
+          background:
+            "linear-gradient(0deg, rgba(244, 163, 0, 0.22) 0%, rgba(255, 248, 240, 0) 100%)",
           zIndex: 0,
         }}
       ></div>
@@ -84,25 +86,40 @@ const Hero = () => {
       {/* Global Animations */}
       <style jsx global>{`
         @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
         }
         @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0px); }
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0px);
+          }
         }
-        .animate-bounce-slow { 
-          animation: bounce-slow 2s ease-in-out infinite; 
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
         }
-        .animate-fade-in { 
-          animation: fade-in 0.5s ease-out; 
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out;
         }
         .animate-spin {
           animation: spin 1s linear infinite;
         }
         @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </div>
