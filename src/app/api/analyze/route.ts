@@ -16,8 +16,6 @@ interface RequestBody {
   resume: string;
   mode: "roast" | "improve";
 }
-
-// Persona-driven prompts that anchor the AI to specific resume anti-patterns
 const PROMPTS = {
   roast: {
     system: `You are the Gordon Ramsay of tech recruiting. You've reviewed 10,000+ resumes and have zero patience for fluff.
@@ -60,10 +58,10 @@ export async function POST(req: NextRequest) {
     }
 
     const config = PROMPTS[mode];
-    const trimmedResume = resume.trim().slice(0, 8000); // Safety limit for context window
+    const trimmedResume = resume.trim().slice(0, 8000);
 
     const requestBody: AIRequestBody = {
-      model: process.env.AI_MODEL || "gemini-2.5-flash-preview-05-20",
+      model: process.env.AI_MODEL || "gemini-3.1-flash-lite-preview",
       messages: [
         { role: "system", content: config.system },
         { role: "user", content: config.user(trimmedResume) },
