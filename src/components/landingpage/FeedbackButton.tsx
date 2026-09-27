@@ -97,24 +97,27 @@ const FeedbackButton = () => {
             </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-3 text-left">
+              <label htmlFor="feedback-name" className="block text-sm font-semibold text-[#44260a]">Name or username (optional)</label>
               <input
+                id="feedback-name"
                 type="text"
-                placeholder="Name / Username(Optional)"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-xl border-2 border-[#e8c99a] bg-white px-4 py-3 text-sm outline-none focus:border-[#f2b055]"
               />
 
+              <label htmlFor="feedback-comments" className="block text-sm font-semibold text-[#44260a]">Your feedback</label>
               <textarea
-                placeholder="Your feedback"
+                id="feedback-comments"
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 rows={3}
                 className="w-full resize-none rounded-xl border-2 border-[#e8c99a] bg-white px-4 py-3 text-sm outline-none focus:border-[#f2b055]"
               />
 
+              <label htmlFor="feedback-improvement" className="block text-sm font-semibold text-[#44260a]">What should improve?</label>
               <textarea
-                placeholder="What should improve?"
+                id="feedback-improvement"
                 value={improvement}
                 onChange={(e) => setImprovement(e.target.value)}
                 rows={3}

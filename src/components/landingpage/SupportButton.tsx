@@ -60,12 +60,13 @@ const SupportButton = () => {
                 <div className="mt-3 inline-block border-2 border-[#66421f] rounded-lg px-3 py-1.5">
                   <p className="text-xs sm:text-sm text-[#66421f] font-medium">
                     eSewa / Khalti:{" "}
-                    <span
-                      className="font-bold cursor-pointer select-all"
-                      onClick={() => navigator.clipboard?.writeText("9823645664")}
+                    <a
+                      href="tel:9823645664"
+                      aria-label="Call 9823645664"
+                      className="font-bold underline underline-offset-2"
                     >
                       9823645664
-                    </span>
+                    </a>
                   </p>
                 </div>
               </div>

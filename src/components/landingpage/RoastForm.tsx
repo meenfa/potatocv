@@ -76,6 +76,7 @@ const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) 
       const text = await extractTextFromFile(file);
       setResume(text);
       setActiveTab("paste");
+      toast.success("Resume text extracted successfully.");
     } catch (error) {
       console.error("Error extracting file:", error);
       toast.error("Could not read that file", {
@@ -134,9 +135,9 @@ const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) 
       {activeTab === "paste" && (
         <div className="mb-6">
           <label htmlFor="resume-text" className="mb-2 block text-left text-sm font-semibold text-[#44260a]">Your resume text</label>
+          <p className="mb-2 text-left text-xs text-[#66421f]">Paste at least 100 characters. Your resume text is sent for AI analysis.</p>
           <textarea
             id="resume-text"
-            placeholder="Paste your CV here. Don’t be shy—we’ve seen worse."
             className="h-44 w-full resize-y rounded-xl border border-[#44260a]/20 bg-[#fffdf5] p-4 text-sm text-[#44260a] placeholder:text-[#8b7968] focus:border-[#c68642] focus:outline-none focus:ring-4 focus:ring-[#c68642]/20 sm:text-base"
             value={resume}
             onChange={(event) => setResume(event.target.value)}

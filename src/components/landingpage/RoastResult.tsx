@@ -3,10 +3,25 @@
 interface RoastResultProps {
   roast: string;
   onClear: () => void;
+  loading?: boolean;
+  error?: string;
 }
 
-const RoastResult = ({ roast, onClear }: RoastResultProps) => {
-  if (!roast) return null;
+const RoastResult = ({ roast, onClear, loading = false, error = "" }: RoastResultProps) => {
+  if (!roast) {
+    return (
+      <section aria-live="polite" className="mt-7 rounded-2xl border border-[#44260a]/15 bg-white/80 px-5 py-6 text-center sm:px-8">
+        <p className="font-bold text-[#44260a]">
+          {loading ? "Your potato is reading the CV…" : error ? "We couldn’t finish that roast." : "Your roast will show up here."}
+        </p>
+        <p className={"mt-1 text-sm " + (error ? "text-red-800" : "text-[#66421f]")}>
+          {loading
+            ? "Finding the useful feedback between the buzzwords."
+            : error || "Add at least 100 characters, then submit your CV to get started."}
+        </p>
+      </section>
+    );
+  }
   const lines = roast.split("\n").map((line) => line.trim()).filter(Boolean);
 
   return (
@@ -20,7 +35,7 @@ const RoastResult = ({ roast, onClear }: RoastResultProps) => {
       </div>
       <div className="space-y-4 px-5 py-6 sm:px-7 sm:py-8">
         {lines.map((line, index) => (
-          <p key={index} className="border-l-2 border-[#c68642] pl-4 text-left text-base leading-7 text-[#44260a] sm:text-lg">
+          <p key={index} className="break-words border-l-2 border-[#c68642] pl-4 text-left text-base leading-7 text-[#44260a] sm:text-lg">
             {line}
           </p>
         ))}

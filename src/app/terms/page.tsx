@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Terms of Service | PotatoCV", description: "Terms for using PotatoCV's resume feedback service." };
+export const metadata = createPageMetadata({
+  title: "Terms of Service",
+  description: "Review the terms for using PotatoCV’s AI resume roast and feedback service.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return <main className="mx-auto min-h-screen max-w-3xl px-6 py-16 text-[#44260a]">

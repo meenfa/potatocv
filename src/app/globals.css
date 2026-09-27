@@ -151,6 +151,8 @@
 
 body {
   font-family: var(--font-fredoka), sans-serif;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .font-poppins {

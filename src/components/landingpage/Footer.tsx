@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { version } from "../../../package.json";
 
 const socialLinks = [
   { href: "https://github.com/meenfa", label: "GitHub", Icon: FaGithub },
-  { href: "https://www.linkedin.com/in/ankit-karki-9128a4286", label: "LinkedIn", Icon: FaLinkedin },
+  { href: "https://www.linkedin.com/in/meenfa", label: "LinkedIn", Icon: FaLinkedin },
   { href: "https://x.com/meenfax", label: "X", Icon: FaXTwitter },
 ];
 
@@ -55,7 +56,12 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-[#211403] hover:underline">Terms</Link>
             <Link href="/contact" className="hover:text-[#211403] hover:underline">Contact</Link>
           </nav>
-          <p>© {new Date().getFullYear()} PotatoCV. All rights reserved.</p>
+          <p className="flex items-center gap-2">
+            <span>© {new Date().getFullYear()} PotatoCV. All rights reserved.</span>
+            <span className="rounded border border-[#44260a]/20 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide">
+              v{version}
+            </span>
+          </p>
         </div>
       </div>
     </footer>

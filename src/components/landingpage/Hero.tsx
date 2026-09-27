@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { FileText, ShieldCheck, Sparkles } from "lucide-react";
+import { FileText, ShieldCheck } from "lucide-react";
+import { toast } from "sonner";
 import Header from "./Header";
 import PotatoCharacter from "./PotatoCharacter";
 import RoastForm from "./RoastForm";
@@ -13,11 +14,13 @@ const Hero = () => {
   const [resume, setResume] = useState("");
   const [roast, setRoast] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleRoast = async () => {
     if (!resume.trim()) return;
     setLoading(true);
     setRoast("");
+    setError("");
     try {
       const res = await fetch("/api/analyze", {
         method: "POST",
@@ -25,17 +28,23 @@ const Hero = () => {
         body: JSON.stringify({ resume, mode: "roast" }),
       });
       const data = await res.json();
-      setRoast(data.result || "Got nothing back! Try again?");
+      if (!res.ok || typeof data.result !== "string" || !data.result.trim()) {
+        throw new Error(data.result || "We couldn’t analyze that CV. Please try again.");
+      }
+      setRoast(data.result);
+      toast.success("Your CV roast is ready.");
     } catch (err) {
       console.error(err);
-      setRoast("Oops! Something went wrong. Try again?");
+      const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
+      toast.error("Couldn’t roast this CV", { description: message });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#fffdf5] text-[#211403]">
+    <div className="relative min-h-screen overflow-x-clip bg-[#fffdf5] text-[#211403]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] opacity-50"
@@ -50,18 +59,15 @@ const Hero = () => {
         <main>
           <section className="mx-auto grid max-w-5xl items-center gap-4 pb-8 pt-4 sm:pb-12 md:grid-cols-[1.15fr_0.85fr] md:gap-8 md:pt-10">
             <div className="text-center md:text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#44260a]/20 bg-white/80 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#66421f]">
-                <Sparkles aria-hidden="true" size={14} /> Honest feedback, with a little spice
-              </span>
-              <h1 className="mx-auto mt-5 max-w-2xl text-4xl font-black leading-[1.05] tracking-tight text-[#211403] sm:text-5xl md:mx-0 md:text-6xl">
+              <h1 className="mx-auto mt-0 max-w-2xl text-4xl font-black leading-[1.05] tracking-tight text-[#211403] sm:text-5xl md:mx-0 md:text-6xl">
                 Your CV deserves a{" "}
-                <span className="relative inline-block whitespace-nowrap">
+                <span className="relative inline-block sm:whitespace-nowrap">
                   <span className="relative z-10">reality check.</span>
                   <span aria-hidden="true" className="absolute inset-x-0 bottom-1 -z-0 h-3 -rotate-1 bg-[#f2b055]/75 sm:h-4" />
                 </span>
               </h1>
               <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-[#66421f] sm:text-lg md:mx-0">
-                Get a sharp, specific AI roast of your resume—plus practical ways to make it stronger. No account, no awkward pep talk.
+                Get a sharp, specific AI roast of your resume plus practical ways to make it stronger. No account, no awkward pep talk.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-[#66421f] md:justify-start">
                 <span className="inline-flex items-center gap-2"><FileText size={16} aria-hidden="true" /> PDF, DOCX or paste</span>
@@ -83,7 +89,15 @@ const Hero = () => {
               <h2 id="form-heading" className="text-2xl font-black tracking-tight text-[#211403] sm:text-3xl">Let’s see what your CV is hiding.</h2>
             </div>
             <RoastForm resume={resume} setResume={setResume} handleRoast={handleRoast} loading={loading} />
-            <RoastResult roast={roast} onClear={() => setRoast("")} />
+            <RoastResult
+              roast={roast}
+              loading={loading}
+              error={error}
+              onClear={() => {
+                setRoast("");
+                setError("");
+              }}
+            />
           </section>
         </main>
         <Footer />

@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "About | PotatoCV", description: "About PotatoCV, the playful AI resume reviewer." };
+export const metadata = createPageMetadata({
+  title: "About",
+  description: "Meet PotatoCV, an AI resume reviewer that pairs playful roasts with practical feedback.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return <main className="mx-auto min-h-screen max-w-3xl px-6 py-16 text-[#44260a]">

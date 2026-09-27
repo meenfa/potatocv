@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Privacy Policy | PotatoCV", description: "How PotatoCV handles resume text, uploaded files, and analytics." };
+export const metadata = createPageMetadata({
+  title: "Privacy Policy",
+  description: "Learn how PotatoCV processes resume text, uploaded files, and analytics data.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return <main className="mx-auto min-h-screen max-w-3xl px-6 py-16 text-[#44260a]">
