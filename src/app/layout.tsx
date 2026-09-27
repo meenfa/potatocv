@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Fredoka } from "next/font/google";
+import { Fredoka } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next"
@@ -7,12 +7,6 @@ const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-fredoka",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {

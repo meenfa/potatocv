@@ -1,52 +1,16 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 
-const PotatoCharacter = () => {
-  const smallPotatos = [
-    { src: "/asset/8.png", top: -100, left: -20, size: 100, opacity: 0.25 },
-    { src: "/asset/9.png", top: -20, right: -40, size: 80, opacity: 0.3 },
-    { src: "/asset/10.png", top: 140, left: 10, size: 70, opacity: 0.35 },
-    { src: "/asset/11.png", top: 240, right: 60, size: 90, opacity: 0.15 },
-  ];
-
-  return (
-    <div className="relative flex justify-center mb-2">
-      <div className="relative animate-bounce-slow z-2">
-        <Image
-          src="/asset/7.png"
-          alt="potato"
-          width={140}
-          height={140}
-          className="w-24 h-24 sm:w-24 sm:h-24 md:w-32 md:h-32"
-          priority
-        />
-      </div>
-
-      {smallPotatos.map((potato, index) => (
-        <div
-          key={index}
-          className="absolute animate-bounce-slow z-0"
-          style={{
-            top: potato.top,
-            left: potato.left,
-            right: potato.right,
-            width: potato.size,
-            height: potato.size,
-            opacity: potato.opacity,
-          }}
-        >
-          <Image
-            src={potato.src}
-            alt={`potato ${index + 1}`}
-            width={potato.size}
-            height={potato.size}
-          />
-        </div>
-      ))}
-    </div>
-  );
-};
+const PotatoCharacter = () => (
+  <div className="mx-auto flex h-48 w-48 items-center justify-center rounded-full border-2 border-[#44260a]/15 bg-[#fff8e9] sm:h-56 sm:w-56">
+    <Image
+      src="/asset/7.png"
+      alt="PotatoCV mascot"
+      width={180}
+      height={180}
+      className="animate-bounce-slow h-40 w-40 object-contain motion-reduce:animate-none sm:h-48 sm:w-48"
+      priority
+    />
+  </div>
+);
 
 export default PotatoCharacter;

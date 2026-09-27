@@ -1,9 +1,10 @@
 "use client";
 
-import { File, Upload, SaveAll } from "lucide-react";
+import { Upload } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import CustomCircleButton from "../common/CustomCircleButton";
+
 interface RoastFormProps {
   resume: string;
   setResume: (value: string) => void;
@@ -12,107 +13,73 @@ interface RoastFormProps {
 }
 
 const MIN_RESUME_LENGTH = 100;
+const MAX_FILE_SIZE = 3 * 1024 * 1024;
+const loadingMessages = [
+  "Reading your CV… trying not to laugh",
+  "Detecting buzzwords… found a few",
+  "Roasting in progress… please hold",
+  "Consulting the potato experts…",
+  "Almost done… brace yourself",
+];
 
-const RoastForm = ({
-  resume,
-  setResume,
-  handleRoast,
-  loading,
-}: RoastFormProps) => {
-  const [loadingMessage, setLoadingMessage] = useState("Preparing to roast...");
-  const [messageIndex, setMessageIndex] = useState(0);
+const RoastForm = ({ resume, setResume, handleRoast, loading }: RoastFormProps) => {
+  const [loadingMessage, setLoadingMessage] = useState(loadingMessages[0]);
+  const [, setMessageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<"upload" | "paste">("upload");
   const [isExtracting, setIsExtracting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   const trimmedLength = resume.trim().length;
   const isValid = trimmedLength >= MIN_RESUME_LENGTH;
   const charsNeeded = MIN_RESUME_LENGTH - trimmedLength;
-  const MAX_FILE_SIZE = 3 * 1024 * 1024;
-  const loadingMessages = [
-    "Reading your CV... trying not to laugh 🧐",
-    "Detecting buzzwords... found too many 💀",
-    "Counting how many times you wrote 'hardworking' 🥔",
-    "Roasting in progress... please hold 🔥",
-    "Finding your strengths... this may take a while 😬",
-    "Consulting the potato gods... 🥔✨",
-    "Almost done... brace yourself 😅",
-    "Your CV has been seen. It cannot be unseen 👀",
-  ];
 
   useEffect(() => {
     if (!loading) {
-      setLoadingMessage("Preparing to roast...");
+      setLoadingMessage(loadingMessages[0]);
       setMessageIndex(0);
       return;
     }
-
     const interval = setInterval(() => {
-      setMessageIndex((prev) => {
-        const next = (prev + 1) % loadingMessages.length;
+      setMessageIndex((previous) => {
+        const next = (previous + 1) % loadingMessages.length;
         setLoadingMessage(loadingMessages[next]);
         return next;
       });
-    }, 1500);
-
+    }, 1800);
     return () => clearInterval(interval);
   }, [loading]);
 
   const extractTextFromFile = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
-
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
+    const res = await fetch("/api/upload", { method: "POST", body: formData });
     const contentType = res.headers.get("content-type") || "";
     const rawText = await res.text();
-
-    if (!res.ok) {
-      throw new Error("Try a different file or paste your CV instead.");
-    }
-
+    if (!res.ok) throw new Error("Try a different file or paste your CV instead.");
     if (!contentType.includes("application/json")) {
-      throw new Error("Something went wrong on our end. Try pasting your CV instead.");
+      throw new Error("Something went wrong. Try pasting your CV instead.");
     }
-
     const data = JSON.parse(rawText);
-
-    if (!data?.text) {
-      throw new Error("Could not read any text from this file. Try pasting your CV instead.");
-    }
-
+    if (!data?.text) throw new Error("Could not read text from this file. Try pasting instead.");
     return data.text;
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (!file) return;
-
-
-    // File size check
     if (file.size > MAX_FILE_SIZE) {
-      toast.error("File too large", {
-        description: "Please upload a file under 3MB. Your CV should not be that long! 🥔",
-      });
-      if (fileInputRef.current) fileInputRef.current.value = "";
+      toast.error("File too large", { description: "Please choose a PDF or DOCX under 3 MB." });
+      event.target.value = "";
       return;
     }
-
     setIsExtracting(true);
-
     try {
       const text = await extractTextFromFile(file);
       setResume(text);
       setActiveTab("paste");
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error extracting file:", error);
-      toast.error("Failed to extract text", {
-        description:
-          error instanceof Error ? error.message : "Unknown error. Try pasting instead!",
+      toast.error("Could not read that file", {
+        description: error instanceof Error ? error.message : "Try pasting your resume instead.",
       });
     } finally {
       setIsExtracting(false);
@@ -121,84 +88,77 @@ const RoastForm = ({
   };
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-xl">
-      <div className="flex border-b border-[#C68642] mb-2">
+    <div className="rounded-2xl border-2 border-[#44260a] bg-white p-5 shadow-[6px_6px_0_#44260a] sm:p-8">
+      <div className="mb-5 inline-flex w-full rounded-xl border border-[#44260a]/15 bg-[#fffdf5] p-1 sm:w-auto" role="group" aria-label="Choose how to add your resume">
         <button
           type="button"
-          className={`px-4 py-2 font-semibold text-base sm:text-lg ${activeTab === "upload"
-            ? "text-[#66421f] border-b-2 border-[#C68642]"
-            : "text-gray-400"
-            }`}
+          aria-pressed={activeTab === "upload"}
+          className={"flex-1 rounded-lg px-4 py-2.5 text-sm font-bold transition-colors sm:flex-none sm:text-base " + (activeTab === "upload" ? "bg-[#f2b055] text-[#211403] shadow-sm" : "text-[#66421f] hover:bg-[#f2b055]/15")}
           onClick={() => setActiveTab("upload")}
         >
-          Upload PDF/DOCX
+          Upload file
         </button>
         <button
           type="button"
-          className={`px-4 py-2 font-semibold text-base sm:text-lg ${activeTab === "paste"
-            ? "text-[#66421f] border-b-2 border-[#2c1905]"
-            : "text-gray-400"
-            }`}
+          aria-pressed={activeTab === "paste"}
+          className={"flex-1 rounded-lg px-4 py-2.5 text-sm font-bold transition-colors sm:flex-none sm:text-base " + (activeTab === "paste" ? "bg-[#f2b055] text-[#211403] shadow-sm" : "text-[#66421f] hover:bg-[#f2b055]/15")}
           onClick={() => setActiveTab("paste")}
         >
-          Paste Text
+          Paste text
         </button>
       </div>
 
       {activeTab === "upload" && (
-        <div className="mb-6 flex flex-col items-center justify-center border-4 border-dashed border-[#382007] rounded-xl p-8 text-center">
+        <div className="mb-6 flex min-h-56 flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#c68642]/60 bg-[#fffdf5] p-6 text-center sm:p-8">
           <input
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
             accept=".pdf,.docx"
-            className="hidden"
+            className="sr-only"
+            aria-label="Upload a PDF or DOCX resume"
           />
-
-          <CustomCircleButton onClick={() => fileInputRef.current?.click()}>
-            <Upload size={26} />
+          <CustomCircleButton
+            ariaLabel="Choose a PDF or DOCX resume to upload"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isExtracting}
+            className="h-12 w-12 sm:h-14 sm:w-14"
+          >
+            <Upload size={22} aria-hidden="true" />
           </CustomCircleButton>
-       
+          <p className="mt-4 font-bold text-[#44260a]">{isExtracting ? "Reading your file…" : "Choose your resume"}</p>
+          <p className="mt-1 text-sm text-[#66421f]">PDF or DOCX · up to 3 MB</p>
         </div>
       )}
 
       {activeTab === "paste" && (
         <div className="mb-6">
+          <label htmlFor="resume-text" className="mb-2 block text-left text-sm font-semibold text-[#44260a]">Your resume text</label>
           <textarea
-            placeholder="Copy-paste your CV content... Don't be shy, we've seen worse 😉"
-            className="w-full h-40 p-4 rounded-xl border-4 border-dashed border-[#C68642] focus:outline-none focus:ring-0 focus:border-[#C68642] resize-none text-[#5a330d] placeholder:text-[#7a6b5c] text-sm sm:text-base bg-white"
+            id="resume-text"
+            placeholder="Paste your CV here. Don’t be shy—we’ve seen worse."
+            className="h-44 w-full resize-y rounded-xl border border-[#44260a]/20 bg-[#fffdf5] p-4 text-sm text-[#44260a] placeholder:text-[#8b7968] focus:border-[#c68642] focus:outline-none focus:ring-4 focus:ring-[#c68642]/20 sm:text-base"
             value={resume}
-            onChange={(e) => setResume(e.target.value)}
+            onChange={(event) => setResume(event.target.value)}
           />
+          <p className="mt-2 text-right text-xs text-[#66421f]">{trimmedLength} characters</p>
         </div>
       )}
 
       {activeTab === "paste" && !isValid && (
-        <p className="text-xs sm:text-sm text-gray-500 mb-4 text-center">
-          Add {charsNeeded} more characters to roast your CV 🥔
+        <p className="mb-4 text-center text-sm text-[#66421f]">
+          Add {charsNeeded} more characters to get your roast.
         </p>
       )}
 
-      <div className="relative inline-block w-full sm:w-auto">
-        <span className="absolute left-[-4px] bottom-[-8px] w-full h-full bg-[#1e1c1b] rounded-xl z-0" />
-        <button
-          type="button"
-          onClick={handleRoast}
-          disabled={!isValid || loading || activeTab === "upload"}
-          className={`relative z-10 w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-[#f2b055] text-[#2b1704] rounded-xl font-bold text-base sm:text-lg transition-all duration-100 active:translate-y-[8px] ${!isValid || loading || activeTab === "upload"
-            ? "opacity-100 cursor-not-allowed"
-            : "cursor-pointer"
-            }`}
-        >
-          {loading ? (
-            <span className="flex flex-col items-center gap-1">
-              <span className="text-sm sm:text-base">{loadingMessage}</span>
-            </span>
-          ) : (
-            <span>🥔 Roast My CV</span>
-          )}
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={handleRoast}
+        disabled={!isValid || loading || activeTab === "upload"}
+        className={"inline-flex w-full items-center justify-center rounded-xl border-2 border-[#211403] bg-[#f2b055] px-8 py-3.5 text-base font-extrabold text-[#211403] shadow-[0_3px_0_#211403] transition hover:bg-[#ffc66e] active:translate-y-0.5 active:shadow-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#c68642]/40 disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"}
+      >
+        {loading ? loadingMessage : <>Roast my CV <span aria-hidden="true" className="ml-2">↗</span></>}
+      </button>
     </div>
   );
 };

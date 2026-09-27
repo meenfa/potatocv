@@ -48,6 +48,8 @@ export async function POST(req: Request) {
       fileName.endsWith(".docx");
 
     if (isPdf) {
+      // pdf-parse v1 is CommonJS and has no TypeScript declarations.
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const pdfParse = require("pdf-parse/lib/pdf-parse");
       const result = await pdfParse(buffer);
       extractedText = result.text || "";

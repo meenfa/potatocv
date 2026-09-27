@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ReactNode } from "react";
 
 type CustomCircleButtonProps = {
@@ -7,6 +5,7 @@ type CustomCircleButtonProps = {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
+  ariaLabel?: string;
 };
 
 const CustomCircleButton = ({
@@ -14,28 +13,17 @@ const CustomCircleButton = ({
   onClick,
   className = "",
   disabled = false,
-}: CustomCircleButtonProps) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`relative inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 ${
-        disabled ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
-      } ${className}`}
-    >
-      <span className="absolute left-[-4px] bottom-[-6px] w-full h-full bg-[#1e1c1b] rounded-full z-0" />
-
-      <div
-        className="relative z-10 w-full h-full flex items-center justify-center rounded-full bg-[#f2b055] transition-all duration-100 active:translate-y-[4px]"
-        style={{
-          boxShadow: "inset 0 1px 0 #EED5B7, inset 0 -4px 0 #8B5E3C",
-        }}
-      >
-        {children}
-      </div>
-    </button>
-  );
-};
+  ariaLabel,
+}: CustomCircleButtonProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    disabled={disabled}
+    aria-label={ariaLabel}
+    className={`inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#44260a] bg-[#f2b055] text-[#211403] shadow-[0_2px_0_#44260a] transition duration-150 hover:-translate-y-0.5 hover:bg-[#ffc66e] hover:shadow-[0_4px_0_#44260a] active:translate-y-0.5 active:shadow-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#c68642]/40 disabled:cursor-not-allowed disabled:opacity-50 sm:h-16 sm:w-16 ${className}`}
+  >
+    {children}
+  </button>
+);
 
 export default CustomCircleButton;
